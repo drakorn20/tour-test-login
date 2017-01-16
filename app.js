@@ -15,10 +15,13 @@ var mongoose = require('mongoose');
 var employees = require('./routes/employees');
 var users = require('./routes/users');
 
+var cors = require('cors')
 
 
 //Init App
 var app = express();
+
+app.use(cors())
 
 //Set Views
 app.set('views', path.join(__dirname, 'views'));
@@ -64,7 +67,6 @@ app.use(expressValidator({
 mongoose.connect('mongodb://localhost/foodtour');
 var db = mongoose.connection;
 
-//Set Url
 app.use('/', users);
 app.use('/staffs', employees);
 

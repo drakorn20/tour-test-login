@@ -6,11 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies":{
+  "dependencies": {
     "bcryptjs": "*",
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
+    "cors": "^2.8.1",
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
