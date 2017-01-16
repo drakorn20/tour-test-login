@@ -14,11 +14,15 @@ var mongoose = require('mongoose');
 // Require routes
 var routes = require('./routes/index');
 var employees = require('./routes/employees');
+var users = require('./routes/users');
 
+var cors = require('cors')
 
 
 //Init App
 var app = express();
+
+app.use(cors())
 
 //Set Views
 app.set('views', path.join(__dirname, 'views'));
@@ -65,8 +69,9 @@ mongoose.connect('mongodb://localhost/foodtour');
 var db = mongoose.connection;
 
 //Set Url
-//app.use('/', routes);
-app.use('/', employees);
+app.use('/', routes);
+app.use('/users', users);
+
 
 
 app.listen(8000);
