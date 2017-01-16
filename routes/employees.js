@@ -4,10 +4,6 @@ var router = express.Router();
 // Require Models
 Employee = require('../models/employees');
 
-router.get('/regist',function(req,res){
-  res.send("abc")
-});
-
 
 //Get all employee
 router.get('/', function(req,res){

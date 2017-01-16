@@ -12,8 +12,8 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 // Require routes
-var routes = require('./routes/index');
 var employees = require('./routes/employees');
+var users = require('./routes/users');
 
 
 
@@ -65,8 +65,8 @@ mongoose.connect('mongodb://localhost/foodtour');
 var db = mongoose.connection;
 
 //Set Url
-//app.use('/', routes);
-app.use('/', employees);
+app.use('/', users);
+app.use('/staffs', employees);
 
 
 app.listen(8000);
