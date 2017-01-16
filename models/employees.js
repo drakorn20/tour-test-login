@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
 //Employee Schema
 var employeeSchema = mongoose.Schema({
@@ -54,9 +55,19 @@ module.exports.getEmployeeById = function(id, callback){
 }
 
 //Add Employee
-module.exports.addEmployee = function(employee, callback){
+module.exports.createEmployee = function(employee, callback){
   Employee.create(employee, callback);
 }
+
+// module.exports.createEmployee = function(employee, callback){
+// 	bcrypt.genSalt(10, function(err, salt) {
+// 	    bcrypt.hash(employee.password, salt, function(err, hash) {
+// 	        employee.password = hash;
+// 	        employee.save(callback);
+// 	    });
+// 	});
+// }
+
 
 //Update Employee
 module.exports.updateEmployee = function(id, employee, option, callback){

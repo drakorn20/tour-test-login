@@ -19,6 +19,7 @@ router.post('/register', function(req, res){
   var surname = req.body.surname;
   var role = req.body.role;
   var residence = req.body.residence;
+  var phone = req.body.phone;
 
 	// Validation
 	req.checkBody('name', 'Name is required').notEmpty();
@@ -31,11 +32,12 @@ router.post('/register', function(req, res){
   req.checkBody('surname', 'Surname is required').notEmpty();
   req.checkBody('role', 'Role is required').notEmpty();
   req.checkBody('residence', 'Residence is required').notEmpty();
+  req.checkBody('phone', 'Phone is required').notEmpty();
 
 	var errors = req.validationErrors();
 
 	if(errors){
-			req.flash('error_msg', errors:errors);
+			console.log(errors)
 
 	 }else{
 		var newEmployee = new Employee({
@@ -51,14 +53,10 @@ router.post('/register', function(req, res){
 
 		});
 
-		User.createUser(newEmployee, function(err, employee){
-			if(err) throw err;
+		Employee.createEmployee(newEmployee, function(err, employee){
+			if(err){console.log(err)}
 			console.log(employee);
 		});
-
-		req.flash('success_msg', 'You are registered and can now login');
-
-		res.redirect('/login');
 	}
 });
 
