@@ -55,18 +55,19 @@ module.exports.getEmployeeById = function(id, callback){
 }
 
 //Add Employee
-module.exports.createEmployee = function(employee, callback){
-  Employee.create(employee, callback);
-}
-
 // module.exports.createEmployee = function(employee, callback){
-// 	bcrypt.genSalt(10, function(err, salt) {
-// 	    bcrypt.hash(employee.password, salt, function(err, hash) {
-// 	        employee.password = hash;
-// 	        employee.save(callback);
-// 	    });
-// 	});
+//   Employee.create(employee, callback);
 // }
+
+//Hash password
+module.exports.createEmployee = function(employee, callback){
+	bcrypt.genSalt(10, function(err, salt) {
+	    bcrypt.hash(employee.password, salt, function(err, hash) {
+	        employee.password = hash;
+	        employee.save(callback);
+	    });
+	});
+}
 
 
 //Update Employee
@@ -89,4 +90,23 @@ module.exports.updateEmployee = function(id, employee, option, callback){
 module.exports.deleteEmployee = function(id, callback){
   var query = {_id: id};
   Employee.remove(query, callback);
+}
+
+//Get User by Email
+module.exports.getUserByEmail = function(username, callback){
+	var query = {email: username};
+	Employee.findOne(query, callback);
+}
+
+//Get User by Id
+module.exports.getUserById = function(id, callback){
+	Employee.findById(id, callback);
+}
+
+//compare password
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+	bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+    	if(err) throw err;
+    	callback(null, isMatch);
+	});
 }
