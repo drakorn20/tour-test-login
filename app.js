@@ -15,13 +15,13 @@ var mongoose = require('mongoose');
 var employees = require('./routes/employees');
 var users = require('./routes/users');
 
-var cors = require('cors')
+var cors = require('cors');
 
 
 //Init App
 var app = express();
 
-app.use(cors())
+app.use(cors());
 
 //Set Views
 app.set('views', path.join(__dirname, 'views'));
