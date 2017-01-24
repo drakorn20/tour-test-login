@@ -7,10 +7,11 @@ Employee = require('../models/employees');
 
 router.post('/login',function(req, res) {
 
+
     console.log(req.body);
 
-    var username = req.body.username;
-    var password = req.body.password;
+    var username = req.body.payload.username;
+    var password = req.body.payload.password;
     var idChecked = false;
     var passChecked = false;
     var isAuthorized = false;
@@ -43,60 +44,33 @@ router.post('/login',function(req, res) {
   });
 
 
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//    Employee.getUserByEmail(username, function(err, user){
-//    	if(err) throw err;
-//    	if(!user){
-//    		return done(null, false, {message: 'Unknown User'});
-//    	}
-//
-//    	Employee.comparePassword(password, user.password, function(err, isMatch){
-//    		if(err) throw err;
-//    		if(isMatch){
-//    			return done(null, user);
-//    		} else {
-//    			return done(null, false, {message: 'Invalid password'});
-//    		}
-//    	});
-//    });
-//   }));
-//
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id);
-// });
-//
-// passport.deserializeUser(function(id, done) {
-//   Employee.getUserById(id, function(err, user) {
-//     done(err, user);
-//   });
-// });
-
 // Register User
 router.post('/register', function(req, res){
 
-	var email = req.body.email;
-	var password = req.body.password;
-	var confirm = req.body.confirm;
-  var nickname = req.body.nickname;
-  var name = req.body.name;
-  var surname = req.body.surname;
-  var role = req.body.role;
-  var residence = req.body.residence;
-  var phone = req.body.phone;
+  console.log(req);
+
+	var email = req.body.payload.email;
+	var password = req.body.payload.password;
+	var confirm = req.body.payload.confirm;
+  var nickname = req.body.payload.nickname;
+  var name = req.body.payload.name;
+  var surname = req.body.payload.surname;
+  var role = req.body.payload.role;
+  var residence = req.body.payload.residence;
+  var phone = req.body.payload.phone;
 
 	// Validation
-	req.checkBody('name', 'Name is required').notEmpty();
-	req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('password', 'Password is required').notEmpty();
-	req.checkBody('confirm', 'Passwords do not match').equals(req.body.password);
-  req.checkBody('nickname', 'Nickname is required').notEmpty();
-  req.checkBody('name', 'Name is required').notEmpty();
-  req.checkBody('surname', 'Surname is required').notEmpty();
-  req.checkBody('role', 'Role is required').notEmpty();
-  req.checkBody('residence', 'Residence is required').notEmpty();
-  req.checkBody('phone', 'Phone is required').notEmpty();
+	req.checkBody('payload.name', 'Name is required').notEmpty();
+	req.checkBody('payload.email', 'Email is required').notEmpty();
+	req.checkBody('payload.email', 'Email is not valid').isEmail();
+	req.checkBody('payload.password', 'Password is required').notEmpty();
+	req.checkBody('payload.confirm', 'Passwords do not match').equals(req.body.payload.password);
+  req.checkBody('payload.nickname', 'Nickname is required').notEmpty();
+  req.checkBody('payload.name', 'Name is required').notEmpty();
+  req.checkBody('payload.surname', 'Surname is required').notEmpty();
+  req.checkBody('payload.role', 'Role is required').notEmpty();
+  req.checkBody('payload.residence', 'Residence is required').notEmpty();
+  req.checkBody('payload.phone', 'Phone is required').notEmpty();
 
 	var errors = req.validationErrors();
 
