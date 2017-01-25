@@ -74,7 +74,8 @@ router.post('/register', function(req, res){
 	var errors = req.validationErrors();
 
 	if(errors){
-			console.log(errors)
+			console.log(errors);
+      res.send({status: 'REGISTER_INCOMPLETE'});
 
 	 }else{
 		var newEmployee = new Employee({
@@ -91,8 +92,8 @@ router.post('/register', function(req, res){
 		});
 
 		Employee.createEmployee(newEmployee, function(err, employee){
-			if(err){console.log(err)}
-			console.log(employee);
+			if(err){res.send({status: 'REGISTER_INCOMPLETE'});}
+			res.send({status: 'REGISTER_COMPLETE'});
 		});
 	}
 });
