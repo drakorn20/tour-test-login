@@ -36,6 +36,10 @@ var employeeSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  isAuthorized:{
+    type: Boolean,
+    default: false
+  },
   create_date:{
     type: Date,
     default: Date.now
