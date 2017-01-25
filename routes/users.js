@@ -30,6 +30,8 @@ router.post('/login',function(req, res) {
 
               if(idChecked && passChecked){
                 isAuthorized = true;
+                var nickname = user.nickname
+                res.send({token: nickname});
                 return console.log("login successful");
               }
 
