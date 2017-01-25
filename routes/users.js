@@ -17,30 +17,27 @@ router.post('/login',function(req, res) {
     var isAuthorized = false;
 
     Employee.getUserByEmail(username, function(err,user){
-      console.log("username = "+ username);
       if(user != null){
-      console.log("user = "+ user);
         idChecked = true;
         Employee.comparePassword(password, user.password, function(err, isMatch){
-          console.log("password =" +password);
-          console.log("user.password =" +user.password);
             if(isMatch){
-              console.log("password is matched")
               passChecked = true;
 
               if(idChecked && passChecked){
                 isAuthorized = true;
                 var nickname = user.nickname
-                res.send({token: nickname});
-                return console.log("login successful");
+                res.send({status: "LOGIN_COMPLETED"});
+                return
               }
 
             }else{
-              return console.log("password is wrong");
+              res.send({status: "LOGIN_INCOMPLETED"});
+              return
             }
         });
       }else{
-        return console.log("id is wrong");
+        res.send({status: "LOGIN_INCOMPLETED"});
+        return
       }
     });
   });
