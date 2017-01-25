@@ -58,6 +58,11 @@ module.exports.getEmployeeById = function(id, callback){
   Employee.find(id, callback);
 }
 
+module.exports.getPendingEmployees = function(callback){
+  Employee.find(
+    {isAuthorized: false}
+    ,callback);
+}
 //Add Employee
 // module.exports.createEmployee = function(employee, callback){
 //   Employee.create(employee, callback);

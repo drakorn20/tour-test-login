@@ -7,9 +7,6 @@ Employee = require('../models/employees');
 
 router.post('/login',function(req, res) {
 
-
-    console.log(req.body);
-
     var username = req.body.payload.username;
     var password = req.body.payload.password;
     var idChecked = false;
@@ -46,8 +43,6 @@ router.post('/login',function(req, res) {
 // Register User
 router.post('/register', function(req, res){
 
-  console.log(req);
-
 	var email = req.body.payload.email;
 	var password = req.body.payload.password;
 	var confirm = req.body.payload.confirm;
@@ -74,7 +69,7 @@ router.post('/register', function(req, res){
 	var errors = req.validationErrors();
 
 	if(errors){
-			console.log(errors);
+    
       res.send({status: 'REGISTER_INCOMPLETE'});
 
 	 }else{
@@ -96,6 +91,15 @@ router.post('/register', function(req, res){
 			res.send({status: 'REGISTER_COMPLETE'});
 		});
 	}
+});
+
+router.get('/pending', function(req,res){
+  Employee.getPendingEmployees(function(err, employees){
+    if(err){
+      throw err;
+    }
+    res.json(employees);
+  });
 });
 
 module.exports = router;
