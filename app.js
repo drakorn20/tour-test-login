@@ -14,6 +14,7 @@ var mongoose = require('mongoose');
 // Require routes
 var employees = require('./routes/employees');
 var users = require('./routes/users');
+var calendar = require('./routes/calendar')
 
 var cors = require('cors');
 
@@ -69,7 +70,7 @@ var db = mongoose.connection;
 
 app.use('/', users);
 app.use('/staffs', employees);
-
+app.use('/calendar', calendar);
 
 app.listen(8000);
 console.log('Running on port 8000....');

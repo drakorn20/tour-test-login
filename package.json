@@ -21,7 +21,9 @@
     "mongoose": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "google-auth-library": "*",
+    "googleapis": "*"
   },
   "author": "",
   "license": "ISC"

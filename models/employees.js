@@ -58,10 +58,21 @@ module.exports.getEmployeeById = function(id, callback){
   Employee.find(id, callback);
 }
 
+//Get Employee with authrized equal false
 module.exports.getPendingEmployees = function(callback){
   Employee.find(
     {isAuthorized: false}
     ,callback);
+}
+
+//Get Guide
+module.exports.getTourGuide = function(callback){
+  Employee.find(
+   {
+    role: "Tour Guide",
+     isAuthorized: true
+   }, callback
+  );
 }
 //Add Employee
 // module.exports.createEmployee = function(employee, callback){
@@ -83,7 +94,7 @@ module.exports.createEmployee = function(employee, callback){
 module.exports.updateEmployee = function(id, employee, option, callback){
   var query = {_id: id};
   var update = {
-    email : employee.name,
+    email : employee.email,
     password: employee.password,
     nickname: employee.nickname,
     name: employee.name,
