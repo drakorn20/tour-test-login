@@ -26,8 +26,15 @@ router.get('/tour-guide', function(req,res){
 });
 
 router.post('/pending', function(req,res){
-  var data = req.body.payload
-  console.log(data);
+  for(var i=0; i < req.body.payload.length; i++){
+    Employee.setAuthorized(req.body.payload[i].id, function(err, employee){
+        if(err){
+          console.log(err);
+        }
+          console.log(employee);
+    });
+  }
+
 });
 
 // Get sppecific employee id

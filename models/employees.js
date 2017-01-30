@@ -65,6 +65,17 @@ module.exports.getPendingEmployees = function(callback){
     ,callback);
 }
 
+module.exports.setAuthorized = function(id, callback){
+  Employee.update(
+    {_id: id},
+    { $set:
+      {
+        isAuthorized: true
+      }
+    },callback
+  );
+}
+
 //Get Guide
 module.exports.getTourGuide = function(callback){
   Employee.find(

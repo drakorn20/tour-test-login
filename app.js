@@ -10,6 +10,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var morgan = require('morgan');
+var jwt = require('jsonwebtoken')
+
+var config = require('./config')
 
 // Require routes
 var employees = require('./routes/employees');
@@ -65,8 +69,14 @@ app.use(expressValidator({
 
 
 //Connect to mongoose
-mongoose.connect('mongodb://localhost/foodtour');
+mongoose.connect(config.database);
 var db = mongoose.connection;
+
+//set secret
+app.set('superSecret', config.secret);
+
+// use morgan to log requests to the console
+app.use(morgan('dev'));
 
 app.use('/', users);
 app.use('/staffs', employees);

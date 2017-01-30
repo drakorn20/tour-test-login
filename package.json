@@ -17,13 +17,15 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "google-auth-library": "*",
+    "googleapis": "*",
+    "jsonwebtoken": "^7.2.1",
     "mongodb": "*",
     "mongoose": "*",
+    "morgan": "^1.7.0",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*",
-    "google-auth-library": "*",
-    "googleapis": "*"
+    "passport-local": "*"
   },
   "author": "",
   "license": "ISC"
